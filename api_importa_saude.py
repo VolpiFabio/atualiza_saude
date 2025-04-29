@@ -41,12 +41,31 @@ def atualizar_pacientes():
 
         for p in pacientes:
             db_destino.execute("""
-                            insert into dim_paciente (
-                            id_paciente_origem, nome, endereco, dtnasc, rg, cpf, sexo, raca, 
-                            mae, pai, bairro, cidade, cep, estado,
-                            telefone1, telefone2, telefone3 
-                            )
-                            values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) """, p)
+                INSERT INTO dim_paciente (
+                    id_paciente_origem, nome, endereco, dtnasc, rg, cpf, sexo, raca, 
+                    mae, pai, bairro, cidade, cep, estado,
+                    telefone1, telefone2, telefone3 
+                )
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (id_paciente_origem)
+                DO UPDATE SET
+                    nome = EXCLUDED.nome,
+                    endereco = EXCLUDED.endereco,
+                    dtnasc = EXCLUDED.dtnasc,
+                    rg = EXCLUDED.rg,
+                    cpf = EXCLUDED.cpf,
+                    sexo = EXCLUDED.sexo,
+                    raca = EXCLUDED.raca,
+                    mae = EXCLUDED.mae,
+                    pai = EXCLUDED.pai,
+                    bairro = EXCLUDED.bairro,
+                    cidade = EXCLUDED.cidade,
+                    cep = EXCLUDED.cep,
+                    estado = EXCLUDED.estado,
+                    telefone1 = EXCLUDED.telefone1,
+                    telefone2 = EXCLUDED.telefone2,
+                    telefone3 = EXCLUDED.telefone3
+            """, p)
             
         conex_dw.commit()
             

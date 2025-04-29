@@ -1,0 +1,6 @@
+Flask
+pymysql
+psycopg2-binary
+python-dotenv
+APScheduler
+gunicorn
