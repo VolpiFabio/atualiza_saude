@@ -46,7 +46,7 @@ pip install -r requirements.txt
 Crie um arquivo .env com suas credenciais  
 
 ### Endpoints  
-POST /atualizar_pacientes: Dispara a sincronização manual  
+GET/POST /atualizar_pacientes: Dispara a sincronização manual  
 
 ## Deploy no Render☁️    
 
